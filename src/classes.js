@@ -98,7 +98,9 @@ class enitityParams {
 }
 
 class entity {
-
+  
+  #mass;
+  
   /** @param   {enitityParams} Params */
   constructor(Params) {
 
@@ -153,6 +155,16 @@ class entity {
   /** @param   {string} string
   collision(string) { Network.collisionEvent.Fire(string) } */
 
+  /** @param   {boolean} boolean */
+  set mass(num) {
+    
+    if (typeof(num) !== "number" || Number.isNaN(num)) { console.error('__INVALID_MASS_INPUT__') }
+
+    this.#mass = num;
+    this.invMass = (this.anchored || num === 0 || num === Infinity || num === -Infinity) ? 0 : 1 / num;
+  }
+
+  get mass() { return this.#mass; }
 
   /** @param   {boolean} boolean */
   set anchored(boolean) {
