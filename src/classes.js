@@ -155,7 +155,7 @@ class entity {
   /** @param   {string} string
   collision(string) { Network.collisionEvent.Fire(string) } */
 
-  /** @param   {boolean} boolean */
+  /** @param   {number} num */
   set mass(num) {
     
     if (typeof(num) !== "number" || Number.isNaN(num)) { console.error('__INVALID_MASS_INPUT__') }
