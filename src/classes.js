@@ -6,6 +6,8 @@
 
 */
 
+//------------- VECTOR CLASS ----------------\\
+
 class Vector2 {
 
   /** @param   {number} x; @param   {number} y*/
@@ -72,10 +74,33 @@ class Vector2 {
   }
 }
 
+//----------------- ENTITY CLASSES -----------------\\
+
+class enitityParams {
+  /**
+  * @param   {'box' | 'sphere'} type
+  * @param   {string} color
+  * @param   {boolean} canCollide
+  * @param   {boolean} anchored
+  * @param   {number} mass
+  * @param   {[number, number]} accel
+  * // Not needed, will default if not specified || also sucks since it requries specific order
+  */// The Order itself is based on: Visuals -> Toggles -> Physics data
+  constructor(type, color, canCollide, anchored, mass, accel) {
+
+    this.type = type || 'box'
+    this.color = color || `hsl(${Math.random() * 360}, 50%, 50%)`
+    this.canCollide = canCollide || false
+    this.anchored = anchored || false
+    this.mass = mass || 1
+    this.accel = accel || [0, 0]
+  }
+}
+
 class entity {
 
   /** @param   {enitityParams} Params */
-  constructor(Params) {
+  constructor(Params = new enitityParams()) {
 
     this.type = Params.type
 
@@ -118,6 +143,9 @@ class entity {
   nearestEdge(x, y) { return { closeX: this.pos.x, closeY: this.pos.y } }
 
   /*
+  // Call whenever a collision happens, such as inside the stepMovement, or collision resolves
+  // May add a method to listen to collisions through Signal, but right now it has to be called manually
+  
   // Example usage demonstrates string sent through a Signal Module
   // .collision('__WALL_LEFT__') || .collision('__ENTITY_SPHERE__')
   /** @param   {string} string
@@ -166,26 +194,7 @@ class entity {
   }
 }
 
-class enitityParams {
-  /**
-  * @param   {'box' | 'sphere'} type
-  * @param   {string} color
-  * @param   {boolean} canCollide
-  * @param   {boolean} anchored
-  * @param   {number} mass
-  * @param   {[number, number]} accel
-  * // Not needed, will default if not specified || also sucks since it requries specific order
-  */// The Order itself is based on: Visuals -> Toggles -> Physics data
-  constructor(type, color, canCollide, anchored, mass, accel) {
-
-    this.type = type || 'box'
-    this.color = color || `hsl(${Math.random() * 360}, 50%, 50%)`
-    this.canCollide = canCollide || false
-    this.anchored = anchored || false
-    this.mass = mass || 1
-    this.accel = accel || [0, 0]
-  }
-}
+//----------------- SHAPE CLASSES -----------------\\
 
 class sphere extends entity {
 
