@@ -11,6 +11,7 @@ import { entity, enitityParams, sphere, box, Vector2 } from './classes.js'
 
 //---------------- TEMPLATES ---------------\\
 
+const defualtParams = new enitityParams('box', 'white', true, false, 25, [0, 0])
 const errorParams = new enitityParams('box', 'hsl(300, 100%, 50%)', true, true, 1, [0, 1])
 const nVector = new Vector2()
 
@@ -337,7 +338,7 @@ class enviroment {
 * @param {enitityParams} params
 * @returns {sphere | box | entity}
 */
-function entityCreate(params) {
+function entityCreate(params = defualtParams) {
   let entity = params.type === 'sphere' ? new sphere(params) : params.type === 'box' ? new box(params) : null
   if (!entity) { console.error('__INVALID_ENTITY_TYPE__'); return new box(errorParams) }
 
