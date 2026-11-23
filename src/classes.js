@@ -158,7 +158,7 @@ class entity {
   /** @param   {number} num */
   set mass(num) {
     
-    if (typeof(num) !== "number" || Number.isNaN(num)) { console.error('__INVALID_MASS_INPUT__') }
+    if (typeof(num) !== "number" || Number.isNaN(num)) { console.error('__INVALID_MASS_INPUT__'); return; }
 
     this.#mass = num;
     this.invMass = (this.anchored || num === 0 || num === Infinity || num === -Infinity) ? 0 : 1 / num;
