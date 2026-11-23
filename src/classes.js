@@ -100,8 +100,10 @@ class enitityParams {
 class entity {
 
   /** @param   {enitityParams} Params */
-  constructor(Params = new enitityParams()) {
+  constructor(Params) {
 
+    if (!Params) { throw new Error('__MISSING_PARAMS__') }
+    
     this.type = Params.type
 
     // do wtv idc
